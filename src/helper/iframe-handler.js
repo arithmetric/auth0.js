@@ -46,6 +46,12 @@ IframeHandler.prototype.init = function () {
 };
 
 IframeHandler.prototype.messageEventListener = function (e) {
+  if (!e.data.hasOwnProperty('accessToken') &&
+      !e.data.hasOwnProperty('idToken') &&
+      !e.data.hasOwnProperty('error')) {
+    return;
+  }
+
   this.destroy();
   this.callbackHandler(e.data);
 };
